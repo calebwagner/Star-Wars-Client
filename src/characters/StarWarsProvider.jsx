@@ -1,8 +1,8 @@
 import React, { useState, createContext } from "react";
 
-export const SwapiContext = createContext();
+export const SwApiContext = createContext();
 
-export const SwapiProvider = (props) => {
+export const StarWarsProvider = (props) => {
     const [characters, setCharacters] = useState([]);
 
 
@@ -10,7 +10,8 @@ export const SwapiProvider = (props) => {
       return fetch("https://swapi.dev/api/people/", {
       })
         .then((res) => res.json())
-        .then((data) => setCharacters(data));
+        .then((data) => setCharacters(data.results)
+        );
     };
 
     const getCharacterById = (id) => {
@@ -19,7 +20,7 @@ export const SwapiProvider = (props) => {
     };
 
     return (
-      <SwapiContext.Provider
+      <SwApiContext.Provider
         value={{
           characters,
           getCharacters,
@@ -27,6 +28,6 @@ export const SwapiProvider = (props) => {
         }}
       >
         {props.children}
-      </SwapiContext.Provider>
+      </SwApiContext.Provider>
     );
   };
