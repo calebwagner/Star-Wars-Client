@@ -1,22 +1,35 @@
-import React, { useContext, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { SwApiContext } from "./StarWarsProvider";
+import React, { useEffect, useState } from "react";
+import { swapiModule } from "./swapi";
 
-export const Profile = () => {
-  const { characters, getCharacters, getCharacterById } = useContext(SwApiContext);
+export const Profile = ({character}) => {
 
-  console.log("In Profile page!!!!!!")
+const [species, setSpecies] = useState(null)
 
   useEffect(() => {
-    // getCharacters();
-    // getCharacterById(10)
+    let url = character.species[0]
+    let urlSplit = url.split("https://swapi.py4e.com/api/species/")
+    let splitAgain = urlSplit[1].split('')
+    let speciesId = splitAgain[0]
+    swapiModule.getSpecies(speciesId, (data) => {
+        setSpecies(data.name)
+      })
   }, []);
+
 
   return (
     <>
-        <div className="">
-            Hi there!
-        </div>
+    <table>
+      <tr>
+        <th>Info on {character.name}</th>
+      </tr>
+      <tr>
+        <td>Height: {character.height}</td>
+        <td>Weight: {character.mass}</td>
+        <td>Hair Color: {character.hair_color}</td>
+        <td>Date of Birth: {character.birth_year}</td>
+        <td>Species: {species}</td>
+      </tr>
+    </table>
     </>
   );
 };

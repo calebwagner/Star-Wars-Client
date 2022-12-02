@@ -15,6 +15,7 @@ export const SearchBar = ({ searchQuery, setSearchQuery }) => {
                 placeholder="Darth Vader"
                 name="s"
             />
+            <button type="submit">Search</button>
         </form>
     );
 };
