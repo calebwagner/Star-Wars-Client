@@ -5,7 +5,7 @@ import { AppViews } from "./AppViews";
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<AppViews />} />
+      <Route path="*" element={<AppViews />} />
     </Routes>
 
   );

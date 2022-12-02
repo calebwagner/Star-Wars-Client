@@ -4,10 +4,11 @@ export const SwApiContext = createContext();
 
 export const StarWarsProvider = (props) => {
     const [characters, setCharacters] = useState([]);
-
+    const [searchTerms, setSearchTerms] = useState("");
 
     const getCharacters = () => {
-      return fetch("https://swapi.dev/api/people/", {
+      // return fetch("https://swapi.dev/api/people/", {
+        return fetch("https://swapi.py4e.com/api/people/", {
       })
         .then((res) => res.json())
         .then((data) => setCharacters(data.results)
@@ -24,7 +25,9 @@ export const StarWarsProvider = (props) => {
         value={{
           characters,
           getCharacters,
-          getCharacterById
+          getCharacterById,
+          searchTerms,
+          setSearchTerms
         }}
       >
         {props.children}
