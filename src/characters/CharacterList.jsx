@@ -3,36 +3,40 @@ import { CharacterDetail } from "./CharacterDetail";
 import { SearchBar } from "./SearchBar";
 import { SwApiContext } from "./StarWarsProvider";
 
-export const CharacterList = () => {
-  const { characters, getCharacters, searchTerms, setSearchTerms } = useContext(SwApiContext);
 
-  const [characterSearch, setCharacterSearch] = useState([]);
+export const CharacterList = () => {
+  const { characters, getCharacters } = useContext(SwApiContext);
+
+  const characterSearch = (characters, query) => {
+    if (!query) {
+        return characters;
+    }
+
+    return characters.filter((character) => {
+        const characterName = character.name.toLowerCase();
+        return characterName.includes(query.toLowerCase());
+    });
+};
+
+  const { search } = window.location;
+  const query = new URLSearchParams(search).get('s');
+  const [searchQuery, setSearchQuery] = useState(query || '');
+  const charactersSearched = characterSearch(characters, searchQuery);
 
 
   useEffect(() => {
     getCharacters();
   }, []);
 
-  useEffect(() => {
-    if (searchTerms !== "") {
-      const characterSearch = characters.filter((character) =>
-      character.name.toLowerCase().includes(searchTerms.toLowerCase())
-      );
-      setCharacterSearch(characterSearch);
-    } else {
-        setCharacterSearch(characters)
-    }
-  }, [searchTerms, characters]);
 
   return (
     <>
-      <input
-        className="search-bar"
-        type="text"
-        placeholder="character search"
-        onKeyUp={(event) => setSearchTerms(event.target.value)} />
+      <SearchBar
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+      />
       <div className="character-list">
-        {characterSearch.map((character) => (
+        {charactersSearched.map((character) => (
           <CharacterDetail key={character.id} character={character} />
         ))}
       </div>
