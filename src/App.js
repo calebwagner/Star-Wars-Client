@@ -1,13 +1,9 @@
-import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import { AppViews } from "./AppViews";
+import { SearchPage } from './common/SearchPage';
 
 function App() {
   return (
-    <Routes>
-      <Route path="*" element={<AppViews />} />
-    </Routes>
-
+    <SearchPage />
   );
 }
 
