@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
 import { Profile } from "./Profile";
 import { SearchBar } from "./SearchBar";
-import { swapiModule } from "./swapi";
+import { fetchPeople } from "../api/FetchPeople";
+
 
 
 export const SearchPage = () => {
 
   const [people, setPeople] = useState([])
-  const [searchParams, setSearchParams] = useSearchParams({});
 
   const characterSearch = (people, query) => {
     if (!query) {return ;}
@@ -25,10 +24,8 @@ export const SearchPage = () => {
   const charactersSearched = characterSearch(people, searchQuery) ? characterSearch(people, searchQuery): [];
 
   useEffect(() => {
-    swapiModule.getPeople({search: charactersSearched}, (data) => {
-        setPeople(data.results)
-        setSearchParams(data.results)
-      })
+    fetchPeople()
+    .then(output => setPeople(output))
   }, []);
 
 
