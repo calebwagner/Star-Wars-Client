@@ -1,6 +1,3 @@
-/**
- * Get all starships form the Starwars API
- */
  import axios from 'axios';
 
  export function fetchStarships() {
@@ -16,21 +13,16 @@
              // exclude the first request
              const numberOfPagesLeft = Math.ceil((count - 1) / 10);
              let promises = [];
-             // start at 2 as you already queried the first page
+             // start at page 2
              for (let i = 2; i <= numberOfPagesLeft; i++) {
                  promises.push(axios(`https://swapi.py4e.com/api/starships?page=${i}`));
              }
              return Promise.all(promises);
          })
          .then(response => {
-             //get the rest records - pages 2 through n.
+             // get the rest records - pages 2 through n.
              starships = response.reduce((acc, data) => [...acc, ...data.data.results], starships);
              return starships;
          })
-         .catch(error => console.log("Properly handle your exception here"));
+         .catch(error => console.log(`Issue with retrieving starships with ${error}`));
  }
- 
-//  (async () => {
-//      const starwarStarships = await fetchStarships();
-//      console.log("starwarStarships", starwarStarships);
-//  })();

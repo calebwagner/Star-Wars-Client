@@ -4,7 +4,6 @@ import { SearchBar } from "./SearchBar";
 import { fetchPeople } from "../api/FetchPeople";
 
 
-
 export const SearchPage = () => {
 
   const [people, setPeople] = useState([])
@@ -19,15 +18,16 @@ export const SearchPage = () => {
 };
 
   const { search } = window.location;
-  const query = new URLSearchParams(search).get('s');
-  const [searchQuery, setSearchQuery] = useState(query || '');
-  const charactersSearched = characterSearch(people, searchQuery) ? characterSearch(people, searchQuery): [];
+  const queryUrl = new URLSearchParams(search)
+  const query = queryUrl.get('s');
+
+  const [searchQuery, setSearchQuery] = useState(query ||'');
+  const charactersSearched = characterSearch(people, query) ? characterSearch(people, query): [];
 
   useEffect(() => {
     fetchPeople()
     .then(output => setPeople(output))
   }, []);
-
 
   return (
     <>

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { fetchStarships } from "../api/FetchStarships";
 import { fetchFilms } from "../api/FetchFilms";
 import { fetchSingleSpecies } from "../api/FetchSingleSpecies";
-import { Table } from "react-bootstrap";
 
 
 export const Profile = ({character}) => {
@@ -99,55 +98,42 @@ const [starships, setStarships] = useState([])
 
   return (
     <>
-    <Table striped bordered hover>
-      <thead>
-        <tr>
-          <th>{character.name || "character name missing"}</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Height: {character.height || "not available"}</td>
-          <td>Weight: {character.mass || "not available"}</td>
-          <td>Hair Color: {character.hair_color || "not available"}</td>
-          <td>Date of Birth: {character.birth_year || "not available"}</td>
-          <td>Species: {species || "not available"}</td>
-        </tr>
-      </tbody>
-    </Table>
+    <table>
+      <tr>
+        <th>{character.name || "character name missing"}</th>
+      </tr>
+      <tr>
+        <td>Height: {character.height || "not available"}</td>
+        <td>Weight: {character.mass || "not available"}</td>
+        <td>Hair Color: {character.hair_color || "not available"}</td>
+        <td>Date of Birth: {character.birth_year || "not available"}</td>
+        <td>Species: {species || "not available"}</td>
+      </tr>
+    </table>
 
-    <Table striped bordered hover>
-    <thead>
-        <tr>
-          <th>Films:</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>
+    <table>
+      <tr>
+        <td>Films:
             {matchPersonToFilm.map((film, index) => {
                return (
-                <tr key={index}>{film}</tr>
+                <div key={index}>{film}</div>
                )
             })}
-          </td>
-        </tr>
-      </tbody>
-    </Table>
+        </td>
+      </tr>
+    </table>
 
-    <Table striped bordered hover>
-      <tbody>
-        <tr>
-          <td>Starships Flown:
+    <table>
+      <tr>
+        <td>Starships Flown:
             {matchPersonToStarship.map((starship, index) => {
                return (
                 <div key={index}>{starship}</div>
                )
             })}
-          </td>
-        </tr>
-      </tbody>
-    </Table>
+        </td>
+      </tr>
+    </table>
     </>
   );
 };
