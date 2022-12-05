@@ -1,7 +1,8 @@
 # Star Wars Code Challenge 
 The premise of this challenge was to create a profile page for various star wars characters in the Star Wars universe.
 
-<img width="1790" alt="Screen Shot 2022-12-05 at 7 33 58 AM" src="https://user-images.githubusercontent.com/81569328/205650013-61e185fb-1de7-4873-b780-c3f74b4d22a0.png">
+<img width="1790" alt="Screen Shot 2022-12-05 at 9 20 48 AM" src="https://user-images.githubusercontent.com/81569328/205674256-d171bf04-bce7-421b-b9d3-6317122ed8df.png">
+
 
 ## Instructions 
 Create a simple single page application that provides the following features:
