@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { fetchStarships } from "../api/FetchStarships";
 import { fetchFilms } from "../api/FetchFilms";
 import { fetchSingleSpecies } from "../api/FetchSingleSpecies";
-import { Table } from "react-bootstrap";
 
 
 export const Profile = ({character}) => {
@@ -50,6 +49,7 @@ const [starships, setStarships] = useState([])
     return starshipUrlIds
   }
 
+  // fix: create universal parse function
   const parseUrls = (item, endpoint) => {
     let itemIds = []
     let itemEndpoint = character.item
@@ -99,7 +99,6 @@ const [starships, setStarships] = useState([])
             }
         }
     }
-    // console.log("matchedFilms ===> ", matchedFilms)
     return matchedFilms
   }
 
@@ -109,113 +108,111 @@ const [starships, setStarships] = useState([])
 
   return (
     <>
-    <div class="p-5">
-      <div class="card-body d-flex justify-content-center flex-nowrap">
-        <h1 class="card-title text-white name">
+    <div className="p-5">
+      <div className="card-body d-flex justify-content-center flex-nowrap">
+        <h1 className="card-title text-white name">
           {character.name || "character name missing"}
         </h1>
       </div>
     </div>
 
-    <div class="row p-2 d-flex">
-      <div class="col-sm-6 d-flex justify-content-around">
-        <div class="card w-75">
-          <div class="card-body">
-            <h5 class="card-title">{character.height || "not available"}</h5>
-            <p class="card-text">height</p>
+    <div className="row p-2 d-flex">
+      <div className="col-sm-6 d-flex justify-content-around">
+        <div className="card w-75">
+          <div className="card-body">
+            <h5 className="card-title">{character.height || "not available"}</h5>
+            <p className="card-text">height</p>
           </div>
         </div>
       </div>
-      <div class="col-sm-6 d-flex justify-content-around">
-        <div class="card w-75">
-          <div class="card-body">
-            <h5 class="card-title">{character.mass || "not available"}</h5>
-            <p class="card-text">weight</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="row p-2">
-      <div class="col-sm-6 d-flex justify-content-around">
-        <div class="card w-75">
-          <div class="card-body">
-            <h5 class="card-title">{character.hair_color || "not available"}</h5>
-            <p class="card-text">hair color</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-6 d-flex justify-content-around">
-        <div class="card w-75">
-          <div class="card-body">
-            <h5 class="card-title">{character.eye_color || "not available"}</h5>
-            <p class="card-text">eye color</p>
+      <div className="col-sm-6 d-flex justify-content-around">
+        <div className="card w-75">
+          <div className="card-body">
+            <h5 className="card-title">{character.mass || "not available"}</h5>
+            <p className="card-text">weight</p>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="row p-2">
-      <div class="col-sm-6 d-flex justify-content-around">
-        <div class="card w-75">
-          <div class="card-body">
-            <h5 class="card-title">{character.birth_year || "not available"}</h5>
-            <p class="card-text">date of birth</p>
+    <div className="row p-2">
+      <div className="col-sm-6 d-flex justify-content-around">
+        <div className="card w-75">
+          <div className="card-body">
+            <h5 className="card-title">{character.hair_color || "not available"}</h5>
+            <p className="card-text">hair color</p>
           </div>
         </div>
       </div>
-      <div class="col-sm-6 d-flex justify-content-around">
-        <div class="card w-75">
-          <div class="card-body">
-            <h5 class="card-title">{species || "not available"}</h5>
-            <p class="card-text">species</p>
+      <div className="col-sm-6 d-flex justify-content-around">
+        <div className="card w-75">
+          <div className="card-body">
+            <h5 className="card-title">{character.eye_color || "not available"}</h5>
+            <p className="card-text">eye color</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div className="row p-2">
+      <div className="col-sm-6 d-flex justify-content-around">
+        <div className="card w-75">
+          <div className="card-body">
+            <h5 className="card-title">{character.birth_year || "not available"}</h5>
+            <p className="card-text">date of birth</p>
+          </div>
+        </div>
+      </div>
+      <div className="col-sm-6 d-flex justify-content-around">
+        <div className="card w-75">
+          <div className="card-body">
+            <h5 className="card-title">{species || "not available"}</h5>
+            <p className="card-text">species</p>
           </div>
         </div>
       </div>
     </div>
 
 <div className="d-flex">
-
-<div className="w-50 pt-5 p-2 mx-auto">
-    <div class="card">
-      <div class="card-body mx-auto">
-        <h5 class="card-title">
-            Films:
-        </h5>
+  <div className="w-50 pt-5 p-2 mx-auto">
+      <div className="card">
+        <div className="card-body mx-auto">
+          <h5 className="card-title">
+              Films:
+          </h5>
+        </div>
       </div>
-    </div>
         {matchPersonToFilm.map((film, index) => {
-               return (
-                <div class="card p-2">
-                <div class="card-body p-2 mx-auto">
-                <p key={index} class="card-text">Episode {film.episode}: {film.title || "not available"}</p>
+            return (
+              <div className="card p-2">
+                <div className="card-body p-2 mx-auto">
+                  <p key={index} className="card-text">Episode {film.episode}: {film.title || "not available"}</p>
+                </div>
               </div>
-              </div>
-               )
-            })}
+                )
+              })}
+   </div>
 
-</div>
-
-<div className="w-50 pt-5 p-2 mx-auto">
-    <div class="card">
-          <div class="card-body mx-auto" >
-            <h5 class="card-title">
+  <div className="w-50 pt-5 p-2 mx-auto">
+      <div className="card">
+          <div className="card-body mx-auto" >
+            <h5 className="card-title">
               Starships Flown:
             </h5>
-          </div>
-    </div>
+        </div>
+  </div>
 
-{matchPersonToStarship.map((starship, index) => {
-               return (
-                <div class="card p-2">
-                <div class="card-body p-2 mx-auto">
-                <p key={index} class="card-text">{starship || "not available"}</p>
-              </div>
-              </div>
-               )
-            })}
+  {matchPersonToStarship.map((starship, index) => {
+    return (
+      <div className="card p-2">
+        <div className="card-body p-2 mx-auto">
+          <p key={index} className="card-text">{starship || "not available"}</p>
+        </div>
+      </div>
+            )
+      })}
 
-</div>
+  </div>
 </div>
     </>
   );
