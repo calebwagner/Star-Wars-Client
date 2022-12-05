@@ -117,17 +117,17 @@ const [starships, setStarships] = useState([])
       </div>
     </div>
 
-    <div class="row p-2">
-      <div class="col-sm-6">
-        <div class="card">
+    <div class="row p-2 d-flex">
+      <div class="col-sm-6 d-flex justify-content-around">
+        <div class="card w-75">
           <div class="card-body">
             <h5 class="card-title">{character.height || "not available"}</h5>
             <p class="card-text">height</p>
           </div>
         </div>
       </div>
-      <div class="col-sm-6">
-        <div class="card">
+      <div class="col-sm-6 d-flex justify-content-around">
+        <div class="card w-75">
           <div class="card-body">
             <h5 class="card-title">{character.mass || "not available"}</h5>
             <p class="card-text">weight</p>
@@ -137,16 +137,16 @@ const [starships, setStarships] = useState([])
     </div>
 
     <div class="row p-2">
-      <div class="col-sm-6">
-        <div class="card">
+      <div class="col-sm-6 d-flex justify-content-around">
+        <div class="card w-75">
           <div class="card-body">
             <h5 class="card-title">{character.hair_color || "not available"}</h5>
             <p class="card-text">hair color</p>
           </div>
         </div>
       </div>
-      <div class="col-sm-6">
-        <div class="card">
+      <div class="col-sm-6 d-flex justify-content-around">
+        <div class="card w-75">
           <div class="card-body">
             <h5 class="card-title">{character.eye_color || "not available"}</h5>
             <p class="card-text">eye color</p>
@@ -156,16 +156,16 @@ const [starships, setStarships] = useState([])
     </div>
 
     <div class="row p-2">
-      <div class="col-sm-6">
-        <div class="card">
+      <div class="col-sm-6 d-flex justify-content-around">
+        <div class="card w-75">
           <div class="card-body">
             <h5 class="card-title">{character.birth_year || "not available"}</h5>
             <p class="card-text">date of birth</p>
           </div>
         </div>
       </div>
-      <div class="col-sm-6">
-        <div class="card">
+      <div class="col-sm-6 d-flex justify-content-around">
+        <div class="card w-75">
           <div class="card-body">
             <h5 class="card-title">{species || "not available"}</h5>
             <p class="card-text">species</p>
@@ -176,9 +176,9 @@ const [starships, setStarships] = useState([])
 
 <div className="d-flex">
 
-<div className="w-50 p-2 mx-auto">
+<div className="w-50 pt-5 p-2 mx-auto">
     <div class="card">
-      <div class="card-body mx-auto" >
+      <div class="card-body mx-auto">
         <h5 class="card-title">
             Films:
         </h5>
@@ -196,7 +196,7 @@ const [starships, setStarships] = useState([])
 
 </div>
 
-<div className="w-50 p-2 mx-auto">
+<div className="w-50 pt-5 p-2 mx-auto">
     <div class="card">
           <div class="card-body mx-auto" >
             <h5 class="card-title">
