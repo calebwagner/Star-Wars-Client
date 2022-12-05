@@ -1,6 +1,8 @@
 # Star Wars Code Challenge 
 The premise of this challenge was to create a profile page for various star wars characters in the Star Wars universe.
 
+### Techlogies Used: react, axios, bootstrap
+
 https://user-images.githubusercontent.com/81569328/205683654-747ee17c-37c4-45b1-896b-d9c289b6f902.mp4
 
 ## Instructions 
