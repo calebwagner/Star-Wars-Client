@@ -184,9 +184,9 @@ const [starships, setStarships] = useState([])
       </div>
         {matchPersonToFilm.map((film, index) => {
             return (
-              <div className="card p-2">
+              <div key={index} className="card p-2">
                 <div className="card-body p-2 mx-auto">
-                  <p key={index} className="card-text">Episode {film.episode}: {film.title || "not available"}</p>
+                  <p className="card-text">Episode {film.episode}: {film.title || "not available"}</p>
                 </div>
               </div>
                 )
@@ -204,9 +204,9 @@ const [starships, setStarships] = useState([])
 
   {matchPersonToStarship.map((starship, index) => {
     return (
-      <div className="card p-2">
+      <div key={index} className="card p-2">
         <div className="card-body p-2 mx-auto">
-          <p key={index} className="card-text">{starship || "not available"}</p>
+          <p className="card-text">{starship || "not available"}</p>
         </div>
       </div>
             )
