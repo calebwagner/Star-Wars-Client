@@ -1,11 +1,11 @@
 export const SearchBar = ({ searchQuery, setSearchQuery }) => {
 
     return (
-        <form className="form-group has-search">
+        <form className="form-group has-search w-50 mx-auto p-3">
             <label htmlFor="header-search">
-                <span className="">
+                <h1 className="text-white">
                     Star War Character Search
-                </span>
+                </h1>
             </label>
             <input
                 className="form-control"

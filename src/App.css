@@ -1,6 +1,15 @@
+@import url(https://allfont.net/allfont.css?fonts=star-jedi);
+
 body {
-  /* background: url(https://wallpapercave.com/wp/4DuYKpW.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: top; */
+  background: url(https://wallpapercave.com/wp/4DuYKpW.jpg);
+  background-repeat: repeat-y;
+}
+
+.name {
+  box-shadow: 0 10px 8px -4px gold;
+
+}
+
+div {
+  font-family: 'Star Jedi';
 }
