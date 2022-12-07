@@ -61,25 +61,29 @@ const [starships, setStarships] = useState([])
   }
 
   const matchPersonToStarships = () => {
-    let matchedStarships = [];
     const starshipsFlown = parseStarshipUrlsFromPerson()
+    const starshipsMap = new Map();
 
-    // optimize: for O(n) time
-    for (let i = 0; i < starships.length; i++) {
-        const starship = starships[i];
-        for (let j = 0; j < starshipsFlown.length; j++) {
-            const personStarship = starshipsFlown[j];
-            const starshipUrl = starship.url
-
-            let parsedStarshipId = getId(starshipUrl)
-
-            if (parsedStarshipId == personStarship) {
-                matchedStarships.push(starship.name)
-            }
-        }
+    for (const starship of starships) {
+      const starshipUrl = starship.url
+      let parsedStarshipId = getId(starshipUrl)
+      starshipsMap.set(parseInt(parsedStarshipId), starship);
     }
-    return matchedStarships
-  }
+    const characterStarshipMap = new Map();
+    for (const  starshipFlown of starshipsFlown) {
+      let id = parseInt(starshipFlown[0])
+      characterStarshipMap.set(id, starshipsFlown);
+    }
+
+    const result = [];
+    for (const [id, obj] of starshipsMap) {
+      if (characterStarshipMap.has(id)) {
+        result.push(obj.name);
+      }
+    }
+
+    return result;
+}
 
   const matchPersonToFilms = () => {
     let matchedFilms = [];
