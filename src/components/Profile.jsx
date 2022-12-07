@@ -62,13 +62,14 @@ const [starships, setStarships] = useState([])
 
   const matchPersonToStarships = () => {
     const starshipsFlown = parseStarshipUrlsFromPerson()
-    const starshipsMap = new Map();
 
+    const starshipsMap = new Map();
     for (const starship of starships) {
       const starshipUrl = starship.url
       let parsedStarshipId = getId(starshipUrl)
       starshipsMap.set(parseInt(parsedStarshipId), starship);
     }
+
     const characterStarshipMap = new Map();
     for (const  starshipFlown of starshipsFlown) {
       let id = parseInt(starshipFlown[0])
@@ -86,25 +87,31 @@ const [starships, setStarships] = useState([])
 }
 
   const matchPersonToFilms = () => {
-    let matchedFilms = [];
-    const filmsArray = parseFilmUrls()
+    const characterFilms = parseFilmUrls()
 
-    // optimize: for O(n) time
-    for (let i = 0; i < allFilms.length; i++) {
-        const allFilm = allFilms[i];
-        for (let j = 0; j < filmsArray.length; j++) {
-            const personFilm = filmsArray[j];
-            if (allFilm.episode_id == personFilm) {
-                matchedFilms.push(
-                  {
-                    title: allFilm.title,
-                    episode: allFilm.episode_id
-                  })
-            }
-        }
+    const allFilmsMap = new Map();
+    for (const film of allFilms) {
+      const filmId = film.episode_id
+      allFilmsMap.set(parseInt(filmId), film);
     }
-    return matchedFilms
-  }
+
+    const characterFilmsMap = new Map();
+    for (const  starshipFlownId of characterFilms) {
+      characterFilmsMap.set(parseInt(starshipFlownId), characterFilms);
+    }
+
+    const result = [];
+    for (const [id, obj] of allFilmsMap) {
+      if (characterFilmsMap.has(id)) {
+        result.push({
+          title: obj.title,
+          episode: obj.episode_id
+        });
+      }
+    }
+
+    return result;
+}
 
   let matchPersonToFilm = matchPersonToFilms().length ? matchPersonToFilms() : ["films not present"];
 
