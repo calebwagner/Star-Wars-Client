@@ -3,6 +3,7 @@ import { fetchStarships } from "../api/FetchStarships";
 import { fetchFilms } from "../api/FetchFilms";
 import { fetchSingleSpecies } from "../api/FetchSingleSpecies";
 import { matchPersonToStarships, matchPersonToFilms } from "../helpers/matcherFunctions";
+import { parsedSubjectUrls } from "../helpers/parserFunctions";
 
 
 export const Profile = ({character}) => {
@@ -22,38 +23,15 @@ const [starships, setStarships] = useState([])
     .then(output => setStarships(output))
   }, []);
 
-  const parseFilmUrls = () => {
-    let parsedFilmUrlsArray = []
-    let characterFilms = character.films
-    characterFilms.forEach(filmUrl =>  {
-        let parseId = /(?<=films\/)\d*/.exec(filmUrl)
-        let filmId = parseId[0]
-        parsedFilmUrlsArray.push(filmId)
-    });
-    return parsedFilmUrlsArray
-  }
+  let matchPersonToFilm =
+    matchPersonToFilms(allFilms, parsedSubjectUrls(character.films)).length
+  ? matchPersonToFilms(allFilms, parsedSubjectUrls(character.films))
+  : ["films not present"];
 
-  const parseStarshipUrlsFromPerson = () => {
-    let starshipUrlIds = []
-    let personStarships = character.starships
 
-    personStarships.forEach(url =>  starshipUrlIds.push(parseUrl(url)));
-
-    return starshipUrlIds
-  }
-
-  function parseUrl(url) {
-    const matches = url.match(/[^/]+/g);
-    const matchId = parseInt(matches.slice(-1)[0])
-    return matchId;
-  }
-
-  let matchPersonToFilm = matchPersonToFilms(allFilms, parseFilmUrls()).length
-    ? matchPersonToFilms(allFilms, parseFilmUrls())
-    : ["films not present"];
-
-  let matchPersonToStarship = matchPersonToStarships(starships, parseStarshipUrlsFromPerson()).length
-    ? matchPersonToStarships(starships, parseStarshipUrlsFromPerson())
+  let matchPersonToStarship =
+    matchPersonToStarships(starships, parsedSubjectUrls(character.starships)).length
+    ? matchPersonToStarships(starships, parsedSubjectUrls(character.starships))
     : ["No starships flown"];
 
   return (
