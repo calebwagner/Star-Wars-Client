@@ -36,27 +36,25 @@ const [starships, setStarships] = useState([])
   const parseStarshipUrlsFromPerson = () => {
     let starshipUrlIds = []
     let personStarships = character.starships
-    personStarships.forEach(url =>  {
-        const parsedStarshipId = /(?<=starships\/)\d*/.exec(url)
-        starshipUrlIds.push(parsedStarshipId)
-    });
+
+    personStarships.forEach(url =>  starshipUrlIds.push(parseUrl(url)));
+
     return starshipUrlIds
   }
 
-  // fix: create universal parse function
-  const parseUrls = (item, endpoint) => {
-    let itemIds = []
-    let itemEndpoint = character.item
-    itemEndpoint.forEach(url =>  {
-        const parsedUrl = /(?<=starships\/)\d*/.exec(url)
-        itemIds.push(parsedUrl)
-    });
-    return itemIds
+  function parseUrl(url) {
+    const matches = url.match(/[^/]+/g);
+    const matchId = parseInt(matches.slice(-1)[0])
+    return matchId;
   }
 
-  let matchPersonToFilm = matchPersonToFilms(allFilms, parseFilmUrls()).length ? matchPersonToFilms(allFilms, parseFilmUrls()) : ["films not present"];
+  let matchPersonToFilm = matchPersonToFilms(allFilms, parseFilmUrls()).length
+    ? matchPersonToFilms(allFilms, parseFilmUrls())
+    : ["films not present"];
 
-  let matchPersonToStarship = matchPersonToStarships(starships, parseStarshipUrlsFromPerson()).length ? matchPersonToStarships(starships, parseStarshipUrlsFromPerson()) : ["No starships flown"];
+  let matchPersonToStarship = matchPersonToStarships(starships, parseStarshipUrlsFromPerson()).length
+    ? matchPersonToStarships(starships, parseStarshipUrlsFromPerson())
+    : ["No starships flown"];
 
   return (
     <>

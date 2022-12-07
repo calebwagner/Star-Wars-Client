@@ -10,8 +10,7 @@ export const matchPersonToStarships = (starships, starshipsFlown) => {
 
     const characterStarshipMap = new Map();
     for (const  starshipFlown of starshipsFlown) {
-      let id = parseInt(starshipFlown[0])
-      characterStarshipMap.set(id, starshipsFlown);
+      characterStarshipMap.set(starshipFlown, starshipsFlown);
     }
 
     const result = [];
