@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { fetchStarships } from "../api/FetchStarships";
 import { fetchFilms } from "../api/FetchFilms";
 import { fetchSingleSpecies } from "../api/FetchSingleSpecies";
+import { matchPersonToStarships, matchPersonToFilms } from "../helpers/matcherFunctions";
 
 
 export const Profile = ({character}) => {
@@ -20,13 +21,6 @@ const [starships, setStarships] = useState([])
     fetchStarships()
     .then(output => setStarships(output))
   }, []);
-
-
-  const getId = (url) => {
-    const match = /(?<=starships\/)\d*/.exec(url)
-    return match ? match[0] : null;
-
-  }
 
   const parseFilmUrls = () => {
     let parsedFilmUrlsArray = []
@@ -60,62 +54,9 @@ const [starships, setStarships] = useState([])
     return itemIds
   }
 
-  const matchPersonToStarships = () => {
-    const starshipsFlown = parseStarshipUrlsFromPerson()
+  let matchPersonToFilm = matchPersonToFilms(allFilms, parseFilmUrls()).length ? matchPersonToFilms(allFilms, parseFilmUrls()) : ["films not present"];
 
-    const starshipsMap = new Map();
-    for (const starship of starships) {
-      const starshipUrl = starship.url
-      let parsedStarshipId = getId(starshipUrl)
-      starshipsMap.set(parseInt(parsedStarshipId), starship);
-    }
-
-    const characterStarshipMap = new Map();
-    for (const  starshipFlown of starshipsFlown) {
-      let id = parseInt(starshipFlown[0])
-      characterStarshipMap.set(id, starshipsFlown);
-    }
-
-    const result = [];
-    for (const [id, obj] of starshipsMap) {
-      if (characterStarshipMap.has(id)) {
-        result.push(obj.name);
-      }
-    }
-
-    return result;
-}
-
-  const matchPersonToFilms = () => {
-    const characterFilms = parseFilmUrls()
-
-    const allFilmsMap = new Map();
-    for (const film of allFilms) {
-      const filmId = film.episode_id
-      allFilmsMap.set(parseInt(filmId), film);
-    }
-
-    const characterFilmsMap = new Map();
-    for (const  starshipFlownId of characterFilms) {
-      characterFilmsMap.set(parseInt(starshipFlownId), characterFilms);
-    }
-
-    const result = [];
-    for (const [id, obj] of allFilmsMap) {
-      if (characterFilmsMap.has(id)) {
-        result.push({
-          title: obj.title,
-          episode: obj.episode_id
-        });
-      }
-    }
-
-    return result;
-}
-
-  let matchPersonToFilm = matchPersonToFilms().length ? matchPersonToFilms() : ["films not present"];
-
-  let matchPersonToStarship = matchPersonToStarships().length ? matchPersonToStarships() : ["No starships flown"];
+  let matchPersonToStarship = matchPersonToStarships(starships, parseStarshipUrlsFromPerson()).length ? matchPersonToStarships(starships, parseStarshipUrlsFromPerson()) : ["No starships flown"];
 
   return (
     <>
