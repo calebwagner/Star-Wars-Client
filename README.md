@@ -14,3 +14,6 @@ Create a simple single page application that provides the following features:
 - Starships Flown
 
 Use [SWAPI](https://swapi.py4e.com/) to obtain all the star wars data.
+
+## App File Structure
+<img width="392" alt="Screen Shot 2022-12-08 at 10 07 51 AM" src="https://user-images.githubusercontent.com/81569328/206498904-08ac088d-8c5f-4468-8dde-f4917337a3ae.png">
