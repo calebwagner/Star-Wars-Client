@@ -1,10 +1,8 @@
-import './App.css';
-import { SearchPage } from './components/SearchPage';
+import './App.css'
+import { SearchPage } from './components/SearchPage'
 
 function App() {
-  return (
-    <SearchPage />
-  );
+  return <SearchPage />
 }
 
-export default App;
+export default App

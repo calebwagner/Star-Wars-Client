@@ -1,6 +1,6 @@
-import React from 'react';
-import { SearchPage } from './SearchPage';
-import { render, fireEvent } from '@testing-library/react';
+import React from 'react'
+import { SearchPage } from './SearchPage'
+import { render, fireEvent } from '@testing-library/react'
 
 jest.mock('../api/FetchPeople', () => ({
   fetchPeople: jest.fn().mockResolvedValue([
@@ -25,31 +25,31 @@ jest.mock('../api/FetchPeople', () => ({
       gender: 'n/a',
     },
   ]),
-}));
+}))
 
 describe('SearchPage', () => {
   it('renders the SearchBar component', () => {
-    const { getByLabelText } = render(<SearchPage />);
-    const searchBar = getByLabelText('Star Wars Character Search');
+    const { getByLabelText } = render(<SearchPage />)
+    const searchBar = getByLabelText('Star Wars Character Search')
 
-    expect(searchBar).toBeInTheDocument();
-  });
+    expect(searchBar).toBeInTheDocument()
+  })
 
   it('renders a list of character profiles', () => {
-    const { getByTestId } = render(<SearchPage />);
-    const characterList = getByTestId('character-list');
+    const { getByTestId } = render(<SearchPage />)
+    const characterList = getByTestId('character-list')
 
-    expect(characterList).toBeInTheDocument();
-  });
+    expect(characterList).toBeInTheDocument()
+  })
 
   it('filters the list of characters based on the search query', async () => {
-    const { getByPlaceholderText, getByTestId } = render(<SearchPage />);
-    const input = getByPlaceholderText('type name');
-    const characterList = getByTestId('character-list');
+    const { getByPlaceholderText, getByTestId } = render(<SearchPage />)
+    const input = getByPlaceholderText('type name')
+    const characterList = getByTestId('character-list')
 
-    fireEvent.change(input, { target: { value: 'luke' } });
+    fireEvent.change(input, { target: { value: 'luke' } })
 
-    expect(await characterList).toHaveTextContent('Luke Skywalker');
-    expect(await characterList).not.toHaveTextContent('C-3PO');
-  });
-});
+    expect(await characterList).toHaveTextContent('Luke Skywalker')
+    expect(await characterList).not.toHaveTextContent('C-3PO')
+  })
+})
