@@ -1,6 +1,8 @@
 # Star Wars Code Challenge
 
-The premise of this challenge was to create a profile page for various star wars characters in the Star Wars universe.
+The premise of this challenge was to create a profile page for various star wars characters in the Star Wars universe. 
+
+Here is the live site 👉 https://caleb-star-wars-character-search.netlify.app/
 
 ### Techlogies Used: ReactJS, Axios, Bootstrap, and Jest
 
